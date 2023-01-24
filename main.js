@@ -1,9 +1,14 @@
 const { exec } = require('child_process');
 const fs = require('fs');
 const tagPrefix = `${process.env.INPUT_PREFIX || ''}*`;
+const stableMode = `${process.env.INPUT_STABLE}` === 'true'
+const sortMode = `${process.env.INPUT_SORTBY}` === 'date' ? '-creatordate' : '-v:refname'
 
-exec(`git for-each-ref --sort=-creatordate --count 1 --format="%(refname:short)" "refs/tags/${tagPrefix}"`, (err, tag, stderr) => {
+exec(`git for-each-ref --sort=${sortMode} --count 1 --format="%(refname:short)" "refs/tags/${tagPrefix}"`, (err, tag, stderr) => {
     tag = tag.trim();
+    if (stableMode) {
+        tag = tag.split("-")[0]
+    }
 
     if (err) {
         console.log('\x1b[33m%s\x1b[0m', 'Could not find any tags because: ');
