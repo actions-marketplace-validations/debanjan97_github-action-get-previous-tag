@@ -1,4 +1,4 @@
-name: 'Get Latest Tag'
+name: 'Get Latest (Stable) Tag'
 description: 'Get the latest tag from git and outputs that for use in other actions'
 branding:
   icon: 'tag'
@@ -14,6 +14,9 @@ inputs:
     description: 'Flag to determine whether to return stable tag'
     required: false
     type: boolean
+  sort:
+    description: 'Get the latest tag by date or by lexicograhical order'
+    required: false
 outputs:
   tag:
     description: 'Latest tag'
