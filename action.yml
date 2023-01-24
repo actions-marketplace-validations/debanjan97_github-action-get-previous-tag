@@ -10,6 +10,10 @@ inputs:
   prefix:
     description: 'Prefix to query the tag by'
     required: false
+  stable:
+    description: 'Flag to determine whether to return stable tag'
+    required: false
+    type: boolean
 outputs:
   tag:
     description: 'Latest tag'
